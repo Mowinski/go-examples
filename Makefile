@@ -4,7 +4,8 @@ OUT_NAME = go-examples
 
 all: json bytes print writer helloworld variables zerovalues conditional \
 	forloop shortstatement switch shortswitch functions returnmanyvalues \
-	returnfunction defer
+	returnfunction defer pointer arrays arrayslitterals slices range struct \
+	pointertostruct method pointerreceiver
 	go build -o $(OUT_NAME)
 	
 create-structure:
@@ -58,6 +59,35 @@ returnfunction: create-structure returnfunction/returnfunction.go
 defer: create-structure defer/defer.go
 	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
 
+pointer: create-structure pointer/pointer.go
+	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
+	
+arrays: create-structure arrays/arrays.go
+	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
+
+arrayslitterals: create-structure arrayslitterals/arrayslitterals.go
+	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
+	
+slices: create-structure slices/slices.go
+	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
+	
+append: create-structure append/append.go
+	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
+
+range: create-structure range/range.go
+	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
+
+struct: create-structure struct/struct.go
+	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
+
+pointertostruct: create-structure pointertostruct/pointertostruct.go
+	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
+
+method: create-structure method/method.go
+	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
+	
+pointerreceiver: create-structure pointerreceiver/pointerreceiver.go
+	${GOPLUGIN} -o $(ODIR)/$@.so $@/$@.go
 	
 clean:
 	rm $(ODIR) -rf
