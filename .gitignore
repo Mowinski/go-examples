@@ -1,2 +1,4 @@
 build/*
+plugins/*
 golang-workshop-presentation
+go-examples

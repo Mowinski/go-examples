@@ -2,31 +2,32 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"plugin"
+	"strings"
 )
 
 type Plugin interface {
 	Example()
 }
 
-var sampleList = [...]string{
-	"print",
-	"bytes",
-	"writer",
-	"json",
-}
-
 func greatings() {
 	fmt.Println()
 	fmt.Println("Choose sample: ")
-	for _, app := range sampleList {
-		fmt.Println(" * ", app)
+
+	files, err := ioutil.ReadDir("./plugins")
+	if err != nil {
+		panic(err)
+	}
+
+	for _, file := range files {
+		fmt.Println(" * ", strings.Split(file.Name(), ".")[0])
 	}
 	fmt.Println("To exit type: quit")
 }
 
 func executeExternalFunction(mod string) error {
-	plug, err := plugin.Open("build/" + mod + ".so")
+	plug, err := plugin.Open("plugins/" + mod + ".so")
 	if err != nil {
 		return err
 	}
